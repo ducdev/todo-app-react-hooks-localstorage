@@ -50,6 +50,18 @@ const Todo = () => {
     saveTodoItemsToLocalStorage('todo', newTodoItems)
   }, [todoItems])
 
+  const toggleTodoDoneHandler = useCallback(id => {
+    const todo = todoItems.find(todoItem => todoItem.id === id)
+    todo.isDone = !todo.isDone
+
+    // Update todoItems state
+    setTodoItems([...todoItems])
+
+    // Save to localStorage
+    saveTodoItemsToLocalStorage('todo', todoItems)
+
+  }, [todoItems])
+
   return (
     <div className="todo">
       <h1>Todo</h1>
@@ -60,10 +72,11 @@ const Todo = () => {
 
       <TodoList
         todoItems={todoItems} // Passing todoItems to TodoList
-        onRemoveTodo={removeTodoHandler} // Passing addTodoHandler to TodoList
+        onRemoveTodo={removeTodoHandler} // Passing removeTodoHandler to TodoList
+        onToggleTodoDone={toggleTodoDoneHandler} // Passing toggleTodoDoneHandler to TodoList
       />
     </div>
   );
 }
 
-export default Todo;
+export default React.memo(Todo);

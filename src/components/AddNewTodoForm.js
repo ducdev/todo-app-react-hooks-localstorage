@@ -52,4 +52,4 @@ const AddNewTodoForm = ({ onAddTodo }) => {
   )
 };
 
-export default AddNewTodoForm;
+export default React.memo(AddNewTodoForm);
