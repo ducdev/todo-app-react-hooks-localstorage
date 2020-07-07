@@ -39,6 +39,17 @@ const Todo = () => {
     saveTodoItemsToLocalStorage('todo', newTodoItems)
   }, [todoItems]) // Dependencies list for useCallback
 
+  const removeTodoHandler = useCallback(id => {
+    // Filter out the todoItem which is about to be removed
+    const newTodoItems = todoItems.filter(todoItem => todoItem.id !== id)
+
+    // Update todoItems state
+    setTodoItems(newTodoItems)
+
+    // Save to localStorage
+    saveTodoItemsToLocalStorage('todo', newTodoItems)
+  }, [todoItems])
+
   return (
     <div className="todo">
       <h1>Todo</h1>
@@ -49,6 +60,7 @@ const Todo = () => {
 
       <TodoList
         todoItems={todoItems} // Passing todoItems to TodoList
+        onRemoveTodo={removeTodoHandler} // Passing addTodoHandler to TodoList
       />
     </div>
   );

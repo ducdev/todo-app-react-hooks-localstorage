@@ -3,7 +3,7 @@ import React from 'react';
 // COMPONENT
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todoItems }) => (
+const TodoList = ({ todoItems, onRemoveTodo }) => (
   <ul>
     {
       todoItems && // Check if todoItems exists
@@ -12,7 +12,9 @@ const TodoList = ({ todoItems }) => (
       todoItems.map(({ id, todo }) => ( // If all conditions are met, we render a list of todo items
         <TodoItem
           key={id}
+          id={id}
           todo={todo}
+          onRemoveTodo={onRemoveTodo}
         />
       ))
     }

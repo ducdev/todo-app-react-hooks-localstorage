@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-const TodoItem = ({ todo }) => (
-  // TODO: we'll have more things to work with this components later.
-  <li>
-    {todo}
-  </li>
-);
+const TodoItem = ({ todo, id, onRemoveTodo }) => {
+  const removeTodoHandler = useCallback(() => onRemoveTodo(id), [id, onRemoveTodo])
+
+  return (
+    <li>
+      <span>{todo}</span>
+      <button onClick={removeTodoHandler}>Remove</button>
+    </li>
+  )
+};
 
 export default TodoItem;
