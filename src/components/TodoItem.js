@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-const TodoItem = ({ label }) => (
+const TodoItem = ({ todo }) => (
+  // TODO: we'll have more things to work with this components later.
   <li>
-    {label}
+    {todo}
   </li>
-)
+);
 
-export default TodoItem
+export default TodoItem;
