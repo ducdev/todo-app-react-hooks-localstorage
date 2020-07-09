@@ -37,6 +37,7 @@ const Todo = () => {
 
     // Save to localStorage
     saveTodoItemsToLocalStorage('todo', newTodoItems)
+        console.log(newTodoItems)
   }, [todoItems]) // Dependencies list for useCallback
 
   const removeTodoHandler = useCallback(id => {
@@ -62,18 +63,30 @@ const Todo = () => {
 
   }, [todoItems])
 
+  const editTodoHandler = useCallback((id, todo) => {
+    const editingTodo = todoItems.find(todoItem => todoItem.id === id)
+    editingTodo.todo = todo
+    // Update todoItems state
+    setTodoItems([...todoItems])
+
+    // Save to localStorage
+    saveTodoItemsToLocalStorage('todo', todoItems)
+    
+  }, [todoItems])
+
   return (
     <div className="todo">
       <h1>Todo</h1>
 
       <AddNewTodoForm
-        onAddTodo={addTodoHandler} // Passing addTodoHandler to AddNewTodoForm
+        onAddTodo={addTodoHandler} // Passing down addTodoHandler
       />
 
       <TodoList
-        todoItems={todoItems} // Passing todoItems to TodoList
-        onRemoveTodo={removeTodoHandler} // Passing removeTodoHandler to TodoList
-        onToggleTodoDone={toggleTodoDoneHandler} // Passing toggleTodoDoneHandler to TodoList
+        todoItems={todoItems} // Passing down todoItems
+        onRemoveTodo={removeTodoHandler} // Passing down removeTodoHandler
+        onToggleTodoDone={toggleTodoDoneHandler} // Passing down toggleTodoDoneHandler
+        onEditTodo={editTodoHandler} // Passing down editTodoHandler
       />
     </div>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 // COMPONENT
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todoItems, onRemoveTodo, onToggleTodoDone }) => {
+const TodoList = ({ todoItems, onRemoveTodo, onToggleTodoDone, onEditTodo }) => {
   return (
     <ul>
       {
@@ -17,6 +17,7 @@ const TodoList = ({ todoItems, onRemoveTodo, onToggleTodoDone }) => {
             todo={todo}
             onRemoveTodo={onRemoveTodo}
             onToggleTodoDone={onToggleTodoDone}
+            onEditTodo={onEditTodo}
             isDone={isDone}
           />
         ))
