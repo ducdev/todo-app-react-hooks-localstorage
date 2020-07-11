@@ -42,7 +42,6 @@ const Todo = () => {
 
     // Save to localStorage
     saveTodoItemsToLocalStorage('todo', newTodoItems)
-        console.log(newTodoItems)
   }, [todoItems]) // Dependencies list for useCallback
 
   const removeTodoHandler = useCallback(id => {

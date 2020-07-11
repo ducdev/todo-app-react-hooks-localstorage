@@ -10,9 +10,9 @@ const TodoList = ({ todoItems, onRemoveTodo, onToggleTodoDone, onEditTodo, setCu
         todoItems && // Check if todoItems exists
         Array.isArray(todoItems) && // Check if it's an array
         todoItems.length > 0 && // The array should not be empty
-        todoItems.map(({ id, todo, isDone }) => ( // If all conditions are met, we render a list of todo items
+        todoItems.map(({ id, todo, isDone }) => (
           <TodoItem
-            key={id}s
+            key={id}
             id={id}
             todo={todo}
             onRemoveTodo={onRemoveTodo}
