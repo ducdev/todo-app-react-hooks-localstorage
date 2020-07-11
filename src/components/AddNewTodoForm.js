@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-const AddNewTodoForm = ({ onAddTodo }) => {
+const AddNewTodoForm = ({ onAddTodo, customError }) => {
   // Initialize a form instance with useFormik hook
   const formik = useFormik({
     // Disable validation onChange and onBlur for keeping validation errors less annoying
@@ -35,9 +35,11 @@ const AddNewTodoForm = ({ onAddTodo }) => {
 
   const aFormikError = errorKeys.length > 0 ? formik.errors[errorKeys[0]] : null;
 
+  const error = customError || aFormikError
+
   return (
+    <>
     <form onSubmit={formik.handleSubmit}>
-      <label>Todo:</label>
       <input
         id="todo"
         name="todo"
@@ -45,10 +47,12 @@ const AddNewTodoForm = ({ onAddTodo }) => {
         onChange={formik.handleChange}
         value={formik.values.todo}
         autoComplete="off"
+        placeholder="What needs to be done?"
       />
-      <button type="submit">Submit</button>
-      {aFormikError && <span>{aFormikError}</span>}
+      <button type="submit">Add</button>
     </form>
+    {error && <span>{error}</span>}
+    </>
   )
 };
 

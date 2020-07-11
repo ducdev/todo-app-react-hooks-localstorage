@@ -5,11 +5,16 @@ import TodoList from './components/TodoList';
 import AddNewTodoForm from './components/AddNewTodoForm';
 
 // HELPER
-import { getTodoItemsFromLocalStorage, saveTodoItemsToLocalStorage } from './helpers'
+import { getTodoItemsFromLocalStorage, saveTodoItemsToLocalStorage } from './helpers';
+
+// STYLE
+import style from './Todo.module.scss';
 
 const Todo = () => {
   // Initialize todoItems state with the JSON string stored under todo key in localStorage, if it's falsy, use an empty array instead
   const [todoItems, setTodoItems] = useState(getTodoItemsFromLocalStorage('todo') || [])
+  
+  const [customError, setCustomError] = useState(null)
 
   // Event handler for adding new Todo, using useCallback to return a memoized callback.
   const addTodoHandler = useCallback(todo => {
@@ -75,10 +80,9 @@ const Todo = () => {
   }, [todoItems])
 
   return (
-    <div className="todo">
-      <h1>Todo</h1>
-
+    <div className={style.todo}>
       <AddNewTodoForm
+        customError={customError} // Passing down customError
         onAddTodo={addTodoHandler} // Passing down addTodoHandler
       />
 
@@ -87,6 +91,7 @@ const Todo = () => {
         onRemoveTodo={removeTodoHandler} // Passing down removeTodoHandler
         onToggleTodoDone={toggleTodoDoneHandler} // Passing down toggleTodoDoneHandler
         onEditTodo={editTodoHandler} // Passing down editTodoHandler
+        setCustomError={setCustomError} // Passing down setCustomError
       />
     </div>
   );
